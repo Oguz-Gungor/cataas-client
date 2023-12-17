@@ -11,6 +11,7 @@ services:
       - textDirectory=text
       - widthHeightDirectory=widthHeight
       - taggedTextDirectory=tagged
+      - prunePeriodInSeconds=30
     depends_on:
       - db
     ports:

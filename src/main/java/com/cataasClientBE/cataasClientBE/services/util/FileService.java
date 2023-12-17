@@ -1,6 +1,7 @@
 package com.cataasClientBE.cataasClientBE.services.util;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 
 import java.io.*;
 
@@ -25,5 +26,15 @@ public class FileService {
         }
 
         return targetFile;
+    }
+
+    public void prune() {
+        try {
+            File targetFile = new File(BASE_DIR);
+            FileSystemUtils.deleteRecursively(targetFile);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
     }
 }
