@@ -17,6 +17,8 @@
     * textDirectory
     * widthHeightDirectory
     * taggedTextDirectory
+* To change application port, change first port address in server.ports to desired port address 
+* To apply changes, stop container and run docker compose up again
 
 ## Test & usage
 

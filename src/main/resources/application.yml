@@ -6,7 +6,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5440/cataas-client-db
+    url: jdbc:postgresql://cataas-client-db:5440/cataas-client-db
     password: password
     username: username
   jobrunr:
