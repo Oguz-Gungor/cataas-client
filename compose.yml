@@ -1,0 +1,36 @@
+services:
+
+#  server:
+#    image: "cataas-server"
+#    build:
+#      context: .
+#    container_name: cataas-server
+#    environment:
+#      - filteredDirectory=filtered
+#      - taggedDirectory=tagged
+#      - textDirectory=text
+#      - widthHeightDirectory=widthHeight
+#      - taggedTextDirectory=taggedpo
+#    depends_on:
+#      - db
+#    ports:
+#      - "8082:8082"
+  db:
+    image: postgres
+    container_name: cataas-client-db
+  #  restart: always
+    environment:
+      - POSTGRES_DB=cataas-client-db
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - PGPORT=5440
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 100M
+    expose:
+      - "5440"
+    ports:
+      - "5440:5440"

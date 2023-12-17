@@ -1,0 +1,18 @@
+server:
+  port: 8082
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5440/cataas-client-db
+    password: password
+    username: username
+  jobrunr:
+    background-job-server:
+      enabled: true
+    job-scheduler:
+      enabled: true
+    dashboard:
+      enabled: true
