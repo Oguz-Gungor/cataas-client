@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8083:8082"
+      - "8082:8082"
   db:
     image: postgres
     container_name: cataas-client-db

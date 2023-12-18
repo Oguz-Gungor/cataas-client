@@ -1,6 +1,7 @@
 package com.cataasClientBE.cataasClientBE.controllers;
 
 
+import com.cataasClientBE.cataasClientBE.exceptions.CatNotFoundException;
 import com.cataasClientBE.cataasClientBE.services.bussiness.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,34 +22,34 @@ public class CatController {
     @GetMapping(
             path = "/filters",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] get(@RequestParam Map<String, Optional<?>> allRequestParams, @RequestParam String fileName) throws URISyntaxException, IOException {
+    public byte[] get(@RequestParam Map<String, Optional<?>> allRequestParams, @RequestParam String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         return catService.getRandomCat(fileName, allRequestParams);
     }
 
     @GetMapping(
             path = "/{tag}",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getWithTag(@PathVariable String tag, @RequestParam String fileName) throws URISyntaxException, IOException {
+    public byte[] getWithTag(@PathVariable String tag, @RequestParam String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         return catService.getCatWithTag(tag, fileName);
     }
 
     @GetMapping(
-            path = "/{text}",
+            path = "/says/{text}",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getWithText(@PathVariable String text, @RequestParam String fileName) throws URISyntaxException, IOException {
+    public byte[] getWithText(@PathVariable String text, @RequestParam String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         return catService.getCatWithText(text, fileName);
     }
 
     @GetMapping(
             path = "/{tag}/says/{text}",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getWithTagAndText(@PathVariable String tag, @PathVariable String text, @RequestParam String fileName) throws URISyntaxException, IOException {
+    public byte[] getWithTagAndText(@PathVariable String tag, @PathVariable String text, @RequestParam String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         return catService.getCatWithTagAndText(tag, text, fileName);
     }
 
     @GetMapping(
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getWithWidthAndHeight(@RequestParam(required = false) Optional<Integer> width, @RequestParam(required = false) Optional<Integer> height, @RequestParam String fileName) throws URISyntaxException, IOException {
+    public byte[] getWithWidthAndHeight(@RequestParam(required = false) Optional<Integer> width, @RequestParam(required = false) Optional<Integer> height, @RequestParam String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         return catService.getCatWithWidthAndHeight(width, height, fileName);
     }
 
