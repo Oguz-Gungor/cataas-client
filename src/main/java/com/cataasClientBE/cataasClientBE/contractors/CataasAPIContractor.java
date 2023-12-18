@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.function.ThrowingSupplier;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,24 +26,24 @@ public class CataasAPIContractor {
     private RequestService requestService;
 
 
-    public byte[] getRandomCat(Map<String, Optional<?>> params) throws URISyntaxException, IOException, CatNotFoundException {
+    public byte[] getRandomCat(Map<String, Optional<?>> params) throws IOException, CatNotFoundException {
         return get(BASE_PATH, params);
     }
 
-    public byte[] getCatWithTag(String tag) throws URISyntaxException, IOException, CatNotFoundException {
+    public byte[] getCatWithTag(String tag) throws IOException, CatNotFoundException {
         return get(getCatWithTagURLBuilder(BASE_PATH, tag));
     }
 
-    public byte[] getCatWithTagAndText(String tag, String text) throws URISyntaxException, IOException, CatNotFoundException {
+    public byte[] getCatWithTagAndText(String tag, String text) throws IOException, CatNotFoundException {
         String withTag = getCatWithTagURLBuilder(BASE_PATH, tag);
         return get(getCatWithTextURLBuilder(withTag, text));
     }
 
-    public byte[] getCatWithText(String text) throws URISyntaxException, IOException, CatNotFoundException {
+    public byte[] getCatWithText(String text) throws IOException, CatNotFoundException {
         return get(getCatWithTextURLBuilder(BASE_PATH, text));
     }
 
-    public byte[] getCatWithWidthAndHeight(Optional<Integer> width, Optional<Integer> height) throws URISyntaxException, IOException, CatNotFoundException {
+    public byte[] getCatWithWidthAndHeight(Optional<Integer> width, Optional<Integer> height) throws IOException, CatNotFoundException {
         return get(BASE_PATH, Map.of(WIDTH_PARAMETER_KEY, width, HEIGHT_PARAMETER_KEY, height));
     }
 
@@ -53,11 +52,11 @@ public class CataasAPIContractor {
         return response.getBody().readAllBytes();
     }
 
-    private byte[] get(String url) throws URISyntaxException, IOException, CatNotFoundException {
+    private byte[] get(String url) throws IOException, CatNotFoundException {
         return getScenario(() -> requestService.get(url));
     }
 
-    private byte[] get(String url, Map<?, Optional<?>> map) throws URISyntaxException, IOException, CatNotFoundException {
+    private byte[] get(String url, Map<?, Optional<?>> map) throws IOException, CatNotFoundException {
         return getScenario(() -> requestService.get(url, map));
     }
 

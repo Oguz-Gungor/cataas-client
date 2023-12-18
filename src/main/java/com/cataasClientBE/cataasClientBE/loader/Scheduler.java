@@ -1,5 +1,6 @@
 package com.cataasClientBE.cataasClientBE.loader;
 
+import com.cataasClientBE.cataasClientBE.repositories.CatImageRepository;
 import com.cataasClientBE.cataasClientBE.services.util.FileService;
 import jakarta.annotation.PostConstruct;
 import org.jobrunr.jobs.annotations.Job;
@@ -22,6 +23,9 @@ public class Scheduler {
 
     @Autowired
     private FileService fileService;
+    @Autowired
+    private CatImageRepository repo;
+
 
     @Value("${prunePeriodInSeconds}")
     private Long prunePeriodInSeconds;
@@ -29,18 +33,17 @@ public class Scheduler {
     @PostConstruct
     public void init() {
         logger.info("Cron Job {} will be executed each {} seconds", "prune", prunePeriodInSeconds);
-        BackgroundJob.scheduleRecurrently(cronStringGeneratorInSeconds(prunePeriodInSeconds), this::testJob);
+        BackgroundJob.scheduleRecurrently(cronStringGeneratorInSeconds(prunePeriodInSeconds), this::pruneJob);
     }
 
     private String cronStringGeneratorInSeconds(long seconds) {
         return "*/" + seconds + " * * * * *";
     }
 
-    @Job(name = "test job")
-    public void testJob() {
+    @Job(name = "Prune Job")
+    public void pruneJob() {
         logger.info("Cron Job {} is being executed", "prune");
+        repo.deleteFiles();
         fileService.prune();
     }
-
-
 }

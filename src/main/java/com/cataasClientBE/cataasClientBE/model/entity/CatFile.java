@@ -1,9 +1,6 @@
-package com.cataasClientBE.cataasClientBE.model;
+package com.cataasClientBE.cataasClientBE.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -11,6 +8,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @Builder
+@Table(name = "files")
 public class CatFile {
 
     @Id
@@ -25,5 +23,7 @@ public class CatFile {
 
     @Column(name = "file_size", nullable = false)
     private Long fileSize;
+
+    private boolean deleted;
 
 }

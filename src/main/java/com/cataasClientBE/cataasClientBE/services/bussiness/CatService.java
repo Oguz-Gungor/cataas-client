@@ -2,7 +2,7 @@ package com.cataasClientBE.cataasClientBE.services.bussiness;
 
 import com.cataasClientBE.cataasClientBE.contractors.CataasAPIContractor;
 import com.cataasClientBE.cataasClientBE.exceptions.CatNotFoundException;
-import com.cataasClientBE.cataasClientBE.model.CatFile;
+import com.cataasClientBE.cataasClientBE.model.entity.CatFile;
 import com.cataasClientBE.cataasClientBE.repositories.CatImageRepository;
 import com.cataasClientBE.cataasClientBE.services.util.FileService;
 import org.springframework.beans.factory.annotation.Autowired;

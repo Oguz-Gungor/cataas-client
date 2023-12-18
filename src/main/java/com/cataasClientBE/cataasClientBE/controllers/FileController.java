@@ -1,7 +1,9 @@
 package com.cataasClientBE.cataasClientBE.controllers;
 
-import com.cataasClientBE.cataasClientBE.model.CatFile;
+import com.cataasClientBE.cataasClientBE.model.dto.FileReport;
+import com.cataasClientBE.cataasClientBE.model.entity.CatFile;
 import com.cataasClientBE.cataasClientBE.repositories.CatImageRepository;
+import com.cataasClientBE.cataasClientBE.services.util.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +19,15 @@ import java.util.List;
 public class FileController {
 
     @Autowired
-    CatImageRepository fileRepository;
+    FileService fileService;
 
-    @GetMapping(value = "/all")
-    List<CatFile> getAll() throws URISyntaxException, IOException {
+    @GetMapping(value = "/reportJson")
+    FileReport getFileReportJson() {
+        return fileService.getFileReportJson();
+    }
 
-        return Streamable.of(fileRepository.findAll()).toList();
+    @GetMapping(value = "/report")
+    String getFileReport() {
+        return fileService.getFileReport();
     }
 }
