@@ -24,6 +24,10 @@
 
 * Application uses swagger ui, it can be reached via http://localhost:8082/swagger-ui/index.html
 
+## Bonus parts
+
+* Implementation of bonus parts can be found in optionals branch
+
 ## Technologies & Libraries
 * Java 21
 * PostgreSQL
