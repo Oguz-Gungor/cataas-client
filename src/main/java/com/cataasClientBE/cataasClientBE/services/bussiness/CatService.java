@@ -1,6 +1,7 @@
 package com.cataasClientBE.cataasClientBE.services.bussiness;
 
 import com.cataasClientBE.cataasClientBE.contractors.CataasAPIContractor;
+import com.cataasClientBE.cataasClientBE.exceptions.CatNotFoundException;
 import com.cataasClientBE.cataasClientBE.model.CatFile;
 import com.cataasClientBE.cataasClientBE.repositories.CatImageRepository;
 import com.cataasClientBE.cataasClientBE.services.util.FileService;
@@ -34,31 +35,31 @@ public class CatService {
     @Value("${taggedTextDirectory:5}")
     private String tagAndTextDirectory;
 
-    public byte[] getRandomCat(String fileName, Map<String, Optional<?>> params) throws URISyntaxException, IOException {
+    public byte[] getRandomCat(String fileName, Map<String, Optional<?>> params) throws URISyntaxException, IOException, CatNotFoundException {
         byte[] rawBytes = cataasAPI.getRandomCat(params);
         saveCat(rawBytes, filtered, fileName);
         return rawBytes;
     }
 
-    public byte[] getCatWithTag(String tag, String fileName) throws URISyntaxException, IOException {
+    public byte[] getCatWithTag(String tag, String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         byte[] rawBytes = cataasAPI.getCatWithTag(tag);
         saveCat(rawBytes, tagDirectory, fileName);
         return rawBytes;
     }
 
-    public byte[] getCatWithText(String text, String fileName) throws URISyntaxException, IOException {
+    public byte[] getCatWithText(String text, String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         byte[] rawBytes = cataasAPI.getCatWithText(text);
         saveCat(rawBytes, textDirectory, fileName);
         return rawBytes;
     }
 
-    public byte[] getCatWithWidthAndHeight(Optional<Integer> width, Optional<Integer> height, String fileName) throws URISyntaxException, IOException {
+    public byte[] getCatWithWidthAndHeight(Optional<Integer> width, Optional<Integer> height, String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         byte[] rawBytes = cataasAPI.getCatWithWidthAndHeight(width, height);
         saveCat(rawBytes, widthAndHeightDirectory, fileName);
         return rawBytes;
     }
 
-    public byte[] getCatWithTagAndText(String tag, String text, String fileName) throws URISyntaxException, IOException {
+    public byte[] getCatWithTagAndText(String tag, String text, String fileName) throws URISyntaxException, IOException, CatNotFoundException {
         byte[] rawBytes = cataasAPI.getCatWithTagAndText(tag, text);
         saveCat(rawBytes, tagAndTextDirectory, fileName);
         return rawBytes;
